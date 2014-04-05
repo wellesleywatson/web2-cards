@@ -1,0 +1,34 @@
+CACHE MANIFEST
+
+# version 2011-07-012 06:06:44 v1
+
+CACHE:
+
+# html files
+#templates/cards.html
+
+
+# css files
+#static/style.css
+
+# js files
+#static/cards.js
+
+#sound files
+#static/flip_card.mp3
+#static/game_over.mp3
+#static/tada.mp3
+
+# images
+#static/calc.png
+
+# https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png
+
+# misc
+#humans.txt
+
+FALLBACK:
+#/ /demo/fallback.html
+
+NETWORK:
+*

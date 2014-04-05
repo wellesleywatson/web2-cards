@@ -1,0 +1,34 @@
+<!doctype html>
+<!--<html manifest="manifest.appcache">-->
+<html >
+  <head>
+    <title> Flip Cards </title>
+   <link href="{{ url_for('static', filename='style.css') }}" rel='stylesheet' type="text/css"/>
+  </head>
+  
+  
+  
+  <body>
+    <div id="players">
+      <div id="player1"></div>
+    </div>
+    <h2 id='welcome'>You are in single player mode. Let the Games begin !!! </h2>
+    <p id='status'></p>
+    <p id='status2'></p>
+   
+     <div class="sideBox"></div>
+  </body>
+   <!--<link href="{{ url_for('static', filename='style.css') }}" rel='stylesheet' type="text/css"/>-->
+  <audio id="audio1" style="display: none" src="{{ url_for('static', filename='flip_card.mp3') }}"></audio>
+  <audio id="audio2" style="display: none" src="{{ url_for('static', filename='game_over.mp3') }}"></audio>
+  <audio id="audio3" style="display: none" src="{{ url_for('static', filename='tada.mp3') }}"></audio>
+  <audio id="audio4" style="display: none" src="{{ url_for('static', filename='applause.mp3') }}"></audio>
+   
+  <script src="{{ url_for('static', filename='cards1.js') }}"></script>
+ <!-- <input type="button" value="Reload Page" onClick="window.location.href=window.location.href"> -->
+  <div class="savegame">
+  <input id="save" type="button" value="Save Game" onclick="saveboard()">
+  <input id="reset" type="button" value="Reset Game" onclick="resetboard()">
+  <input id="restart" type="button" value="Restart Game" onclick="location.reload(true)">
+  </div>
+</html>

@@ -1,0 +1,221 @@
+* {margin: 0; padding: 0;}
+ 
+body {
+  background: #00a651;
+}
+
+#players{
+ height: 20px;
+ width: 1265px;
+ 
+}
+
+#player1{
+ display: inline;
+ margin-left: 50px;
+}
+
+#player2{
+ display: inline; 
+ margin-left: 80px;
+}
+
+ h2{
+  font-family:"Times New Roman",Georgia,Serif;
+  text-align:center;
+  margin-top: 5px;
+  text-shadow: -1px -1px 1px rgba(255,255,255,0.2), 1px 1px 1px rgba(0,0,0,0.6);
+}
+
+#status{
+  text-align: center;
+  margin-top: 15px;
+  font-family: "Times New Roman", Georgia,Serif;
+  
+}
+
+#status2{
+  text-align: center;
+  margin-top: 16px;
+  font-family: "Times New Roman", Georgia,Serif;
+}
+
+
+.savegame{
+ width:290px;
+ height:30px;
+ text-align: center; 
+ /*margin-left: 595px;*/
+ margin-left:auto;
+ margin-right:auto;
+}
+
+
+#save{
+  margin-top: 5px;
+  display: inline;
+  height: 30px;
+  width: 90px;
+  border-radius:10px;
+  /*border:2px solid #a1a1a1;*/
+}
+
+
+#reset{
+  margin-top: 5px;
+  display: inline;
+  height: 30px;
+  width: 90px;
+  border-radius:10px;
+  /*border:2px solid #a1a1a1;*/
+}
+
+#restart{
+  margin-top: 5px;
+  display: inline;
+  height: 30px;
+  width: 90px;
+  border-radius:10px;
+  /*border:2px solid #a1a1a1;*/
+}
+
+.sideBox{
+  width:490px;
+  height:730px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 20px;
+  z-index:1;
+  perspective: 1000;
+  border-radius: 2px;
+  border-style: solid;
+  border-color: black;
+}
+
+
+
+.flipper{
+  position: relative;
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 110px;
+  height: 170px;
+  border-radius: 10px;
+  /*-webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+  -moz-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);*/
+}
+
+.cardback{
+  position: absolute;
+  width: 110px;
+  height: 170px;
+  border-radius: 10px;
+  background: #fff;
+  z-index: 900;
+  color:#33CC33;
+  text-align: center;
+  background: #fff;
+  z-index: 900;
+  font: 100px/120px Georgia, Times New Roman, serif;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -webkit-transition:  0.8s;
+  -moz-transition:  0.8s;
+}
+
+.cardfront{
+  position: absolute;
+  width: 110px;
+  height: 170px;
+  border-radius: 10px;
+  background: #fff;
+  z-index: 900;
+  text-shadow: 3px 3px 7px rgba(0,0,0,0.5);
+  text-align: center;
+  font: 60px/120px Georgia, Times New Roman, serif;
+  background: #fff;
+  opacity: 0;
+  z-index: 900;
+  -webkit-transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition:  0.8s;
+  -moz-transform: rotateY(-180deg);
+  -moz-transform-style: preserve-3d;
+  -moz-transition:  0.8s;
+}
+
+.cardfrontF{
+  position: absolute;
+  width: 110px;
+  height: 170px;
+  border-radius: 10px;
+  opacity: 1;
+  z-index: 900; 
+  background: #fff;
+  text-shadow: 3px 3px 7px rgba(0,0,0,0.5);
+  font: 60px/120px Georgia, Times New Roman, serif;
+  text-align: center;
+  -webkit-transform: rotateY(0deg);
+  -webkit-transition:  0.8s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform: rotateY(0deg);
+  -moz-transition:  0.8s;
+  -moz-transform-style: preserve-3d;
+}
+.cardbackF{
+  position: absolute;
+  width: 110px;
+  height: 170px;
+  border-radius: 10px;
+  background: #fff;
+  color:#33CC33;
+  font: 100px/120px Georgia, Times New Roman, serif;
+  opacity: 0;
+  z-index: 900;
+  text-align: center;
+  -webkit-transform: rotateY(-180deg);
+  -webkit-transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform: rotateY(-180deg);
+  -moz-transition: 0.8s;
+  -moz-transform-style: preserve-3d;
+  
+}
+
+.flipper .cardfrontF.matched, .flipper .cardbackF.matched{
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+}
+
+
+/*.flipper:hover .cardfront{
+  opacity: 1;
+  z-index: 900; 
+  -webkit-transform: rotateY(0deg);
+  -webkit-transition:  0.5s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform: rotateY(0deg);
+  -moz-transition:  0.5s;
+  -moz-transform-style: preserve-3d;
+}
+.flipper:hover .cardback{
+   opacity: 0;
+  z-index: 900;
+  -webkit-transform: rotateY(180deg);
+  -webkit-transition: 0.5s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform: rotateY(180deg);
+  -moz-transition: 0.5s;
+  -moz-transform-style: preserve-3d;
+  
+}*/
+
+
+
+
+
+
+
+
+
