@@ -43,8 +43,9 @@ var showCards = function(cardJSON)
      
       
     var bfcard = document.createElement("div");
-    bfcard.textContent = "❅";
+    //bfcard.textContent = "❅";
     bfcard.className = "cardback";
+    bfcard.style.backgroundImage="url('static/cardback.png')";
     
     var ffcard = document.createElement("div");
     ffcard.textContent = txt;
@@ -265,7 +266,7 @@ var playerChoice1 = function()
   
   if(player1 != "")
   {
-   p1.textContent += "Player 1: " + player1;
+   p1.textContent += "Player Name: " + player1;
    return
   }
   else

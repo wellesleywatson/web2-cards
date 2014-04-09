@@ -43,8 +43,10 @@ var showCards = function(cardJSON)
      
       
     var bfcard = document.createElement("div");
-    bfcard.textContent = "❅";
+    //bfcard.textContent = "❅";
     bfcard.className = "cardback";
+    bfcard.style.backgroundImage="url('static/cardback.png')";
+    //bfcard.style.backgroundImage="{{ url_for('static', filename='cardback.jpg') }}";
     
     var ffcard = document.createElement("div");
     ffcard.textContent = txt;
@@ -93,19 +95,16 @@ var restart = function()
 
 /*===================================================================================================================*/
 
-var turns = 24;
+
 var clicks = [];
-var safe = 0;
+var safe1 = 0;
+var safe2 = 0;
+var vault = 0;
 
 var cardCheck = function(t)
 {
-  if(turns == 0)
-  {
-    audio2.play();
-    restart();
-    return
-  }
-  else if(t)
+
+  if(t)
   {
    audio1.play();
    t.querySelector('.cardfront').className = "cardfrontF";
@@ -120,7 +119,7 @@ var cardCheck = function(t)
    return    
   }
 
-  turns--;
+
   pushtoCardStack(t);
   checkforMatch();
   
@@ -143,13 +142,12 @@ var pushtoCardStack = function(t)
 }
 
 /*=================================================================================================================*/
+var whosplay = 1;
+var who1 = document.getElementById("player1");
+var who2 = document.getElementById("player2");
 
-
-var tempt2 = document.getElementById("status2");
-tempt2.textContent = "Number of turns remaining: " + 24;
-
-
-/*=================================================================================================================*/
+who1.style.backgroundColor="#000000";
+who1.style.color="#A0702E";
 
 
 var checkforMatch = function()
@@ -157,37 +155,25 @@ var checkforMatch = function()
       
        
        if (clicks.length > 1)
-       {  
-         
-         console.log("turns so far: " + turns);
-         
-         tempt2.textContent = "Number of turns remaining: " + turns;
-  
-         
-         if (clicks[0].innerText == clicks[2].innerText) 
+       { 
+         if ((clicks[0].innerText == clicks[2].innerText) && (whosplay == 1))
          {
            audio4.play();
+           vault++;
+           safe1++;
            window.alert("you got a match");
            
            clicks[0].className += " matched";
            clicks[2].className += " matched";
            clicks[1].className += " matched";
            clicks[3].className += " matched";
-           safe++;
            
-           if(safe == 8)
-           {
-             audio3.play();
-             confirm("Congrats, you won !!!!. Would you like to play again?");
-             setTimeout("location.reload(true);",1000);
-           }
            
-          
-           
-         } 
-         else 
+           whosplay = 1;
+           clicks = [];
+         }  
+         else if ((clicks[0].innerText != clicks[2].innerText) && (whosplay == 1))
          {
-           
            alert ("sorry, no match");
            clicks[0].className = "cardfront";
            clicks[1].className = "cardback";
@@ -196,9 +182,78 @@ var checkforMatch = function()
            clicks[3].className = "cardback";
            audio1.play();
            
+           whosplay++;
+           clicks = [];
+           who2.style.backgroundColor="#000000";
+           who2.style.color="#A0702E";
+           
+           who1.style.backgroundColor="#A0702E";
+           who1.style.color="#000000";
+           
+         } 
+         else if ((clicks[0].innerText == clicks[2].innerText) && (whosplay == 2))
+         {
+           audio4.play();
+           vault++;
+           safe2++;
+           window.alert("you got a match");
+           
+           clicks[0].className += " matched";
+           clicks[2].className += " matched";
+           clicks[1].className += " matched";
+           clicks[3].className += " matched";
+           
+           
+           whosplay = 2;
+           clicks = [];
+           
+           who2.style.backgroundColor="#000000";
+           who2.style.color="#A0702E";
+           
+           who1.style.backgroundColor="#A0702E";
+           who1.style.color="#000000";
+         } 
+         else if ((clicks[0].innerText != clicks[2].innerText) && (whosplay == 2))
+         {
+           alert ("sorry, no match");
+           clicks[0].className = "cardfront";
+           clicks[1].className = "cardback";
+           
+           clicks[2].className = "cardfront";
+           clicks[3].className = "cardback";
+           audio1.play();
+           
+           whosplay--;
+           clicks = [];
+           who2.style.backgroundColor="#A0702E";
+           who2.style.color="#000000";
+           
+           who1.style.backgroundColor="#000000";
+           who1.style.color="#A0702E";
          }
+         if(vault == 8)
+        {
+            if(safe1 > safe2)
+            {
+             audio3.play();
+             confirm("Congrats " + player1 + " you won !!!!. Would you like to play again?");
+             setTimeout("location.reload(true);",1000);
+            }
+            else if(safe2 > safe1)
+            {
+             audio3.play();
+             confirm("Congrats " + player2 + " you won !!!!. Would you like to play again?");
+             setTimeout("location.reload(true);",1000);
+            }
+            else 
+            {
+             audio3.play();
+             confirm("The game has ended with a tie, Would you like to play again?");
+             setTimeout("location.reload(true);",1000);
+            }
+        } 
+
          giveprompt();
-         clicks = [];
        }
   
       
@@ -208,7 +263,7 @@ var checkforMatch = function()
 /*===================================================================================================================*/
 
 var tempt = document.getElementById("status");
-tempt.textContent = "Number of Matched Cards: " +  safe;
+
 
 /*===================================================================================================================*/
 
@@ -220,12 +275,53 @@ var giveprompt = function()
   if(document.querySelector('.cardfrontF.matched'))
   {
     
-    tempt.textContent = "Number of Matched Cards: " +  safe; 
-    console.log("number of matched cards: " + safe);
+  
+    scr1.textContent =  "Pairs Matched: " + safe1;
+    scr2.textContent =  "Pairs Matched: " + safe2;
+    console.log("player1's matched cards: " + safe1);
+    console.log("player2's matched cards: " + safe2);
   }
   
 }
 
+
+/*===================================================================================================================*/
+
+var p1 = document.getElementById("player1");
+var p2 = document.getElementById("player2");
+var scr1 = document.getElementById("score1");
+var scr2 = document.getElementById("score2");
+p1.textContent = "Player1: " + player1;
+p2.textContent = "Player2: " + player2;
+scr1.textContent = "Pairs Matched: " + safe1;
+scr2.textContent = "Pairs Matched: " + safe2;
+var player1 = "";
+var player2 = "";
+
+
+var playerChoice = function()
+{
+ 
+  player1 = window.prompt("Please enter Name of player one"); 
+  player2 = window.prompt("Please enter Name of player two");  
+  
+  if((player1 == "") || (player2 == ""))
+  {
+   alert("Not a valid entry, please try again");
+   playerChoice();
+  }
+  
+  else
+  {
+    
+   p1.textContent = "Player1: " + player1;
+   p2.textContent = "Player2: " + player2;
+    
+  }
+  
+}
+
+playerChoice();
 
 /*===================================================================================================================*/
 
@@ -253,36 +349,6 @@ game();
 
 /*=====================================================================================================================*/
 
-var p1 = document.getElementById("player1");
-var p2 = document.getElementById("player2");
-var player1 = "";
-var player2 = "";
-
-var playerChoice = function()
-{
- 
-  player1 = window.prompt("Please enter Name of player one"); 
-  player2 = window.prompt("Please enter Name of player two");  
-  
-  if((player1 == "") || (player2 == ""))
-  {
-   alert("Not a valid entry, please try again");
-   playerChoice();
-  }
-  else
-  {
-   p1.textContent += "Player 1: " + player1;
-   p2.textContent += "Player 1: " + player2;
-  }
-
-}
-
-playerChoice();
-
-
-/*===============================================================================================*/
-
-
 var saveboard = function(){
  var certain = confirm("are you sure you want to save this game?");
  if(certain == true)
@@ -292,7 +358,7 @@ var saveboard = function(){
   var sv = gamePlay[0].innerHTML;
   
   
-  localStorage.twoplayerInfo = JSON.stringify({"pl1":player1, "pl2":player2, "turns":turns, "matched":safe, "gameArea":sv});
+   localStorage.twoplayerInfo = JSON.stringify({"pl1":player1, "pl2":player2, "who":whosplay, "matchedp1":safe1, "matchedp2":safe2, "gameArea":sv});
   alert("Game successfully saved");
   console.log("LS: " + localStorage);
  }
@@ -339,11 +405,28 @@ var certain = confirm("are you sure you want to reset saved game?");
         var n = document.getElementsByClassName("sideBox");
         n[0].innerHTML = keeper.gameArea;
         
-        turns = keeper.turns;
-        tempt2.textContent = "Number of turns remaining: " + keeper.turns;
-        safe = keeper.matched
-        tempt.textContent = "Number of Matched Cards: " + keeper.matched;
-
+        safe1 = keeper.matchedp1;
+        scr1.textContent = "Pairs Matched: " + safe1;
+        safe2 = keeper.matchedp2;
+        scr2.textContent = "Pairs Matched: " + safe2;
+        whosplay = keeper.who;
+    
+    if(whosplay == 1)
+    {
+      who2.style.backgroundColor="#A0702E";
+      who2.style.color="#000000";
+           
+       who1.style.backgroundColor="#000000";
+       who1.style.color="#A0702E";
+    }
+    else
+    {
+      who2.style.backgroundColor="#000000";
+      who2.style.color="#A0702E";
+           
+      who1.style.backgroundColor="#A0702E";
+      who1.style.color="#000000";
+    }
 
    }
    else
@@ -354,4 +437,5 @@ var certain = confirm("are you sure you want to reset saved game?");
 
 
 /*===============================================================================================*/
+
 
